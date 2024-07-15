@@ -1,0 +1,271 @@
+Grammar
+
+    0 $accept: line $end
+
+    1 line: exit_command
+    2     | exp print
+    3     | line exp print
+    4     | exp exit_command
+
+    5 exp: term
+    6    | exp ADD term
+    7    | exp SUB term
+
+    8 term: factor
+    9     | term MUL factor
+   10     | term DIV factor
+
+   11 factor: number
+   12       | LEFTP exp RIGHTP
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+print (258) 2 3
+ADD (259) 6
+SUB (260) 7
+MUL (261) 9
+DIV (262) 10
+LEFTP (263) 12
+RIGHTP (264) 12
+exit_command (265) 1 4
+number (266) 11
+
+
+Nonterminals, with rules where they appear
+
+$accept (12)
+    on left: 0
+line (13)
+    on left: 1 2 3 4, on right: 0 3
+exp (14)
+    on left: 5 6 7, on right: 2 3 4 6 7 12
+term (15)
+    on left: 8 9 10, on right: 5 6 7 9 10
+factor (16)
+    on left: 11 12, on right: 8 9 10
+
+
+state 0
+
+    0 $accept: . line $end
+
+    LEFTP         shift, and go to state 1
+    exit_command  shift, and go to state 2
+    number        shift, and go to state 3
+
+    line    go to state 4
+    exp     go to state 5
+    term    go to state 6
+    factor  go to state 7
+
+
+state 1
+
+   12 factor: LEFTP . exp RIGHTP
+
+    LEFTP   shift, and go to state 1
+    number  shift, and go to state 3
+
+    exp     go to state 8
+    term    go to state 6
+    factor  go to state 7
+
+
+state 2
+
+    1 line: exit_command .
+
+    $default  reduce using rule 1 (line)
+
+
+state 3
+
+   11 factor: number .
+
+    $default  reduce using rule 11 (factor)
+
+
+state 4
+
+    0 $accept: line . $end
+    3 line: line . exp print
+
+    $end    shift, and go to state 9
+    LEFTP   shift, and go to state 1
+    number  shift, and go to state 3
+
+    exp     go to state 10
+    term    go to state 6
+    factor  go to state 7
+
+
+state 5
+
+    2 line: exp . print
+    4     | exp . exit_command
+    6 exp: exp . ADD term
+    7    | exp . SUB term
+
+    print         shift, and go to state 11
+    ADD           shift, and go to state 12
+    SUB           shift, and go to state 13
+    exit_command  shift, and go to state 14
+
+
+state 6
+
+    5 exp: term .
+    9 term: term . MUL factor
+   10     | term . DIV factor
+
+    MUL  shift, and go to state 15
+    DIV  shift, and go to state 16
+
+    $default  reduce using rule 5 (exp)
+
+
+state 7
+
+    8 term: factor .
+
+    $default  reduce using rule 8 (term)
+
+
+state 8
+
+    6 exp: exp . ADD term
+    7    | exp . SUB term
+   12 factor: LEFTP exp . RIGHTP
+
+    ADD     shift, and go to state 12
+    SUB     shift, and go to state 13
+    RIGHTP  shift, and go to state 17
+
+
+state 9
+
+    0 $accept: line $end .
+
+    $default  accept
+
+
+state 10
+
+    3 line: line exp . print
+    6 exp: exp . ADD term
+    7    | exp . SUB term
+
+    print  shift, and go to state 18
+    ADD    shift, and go to state 12
+    SUB    shift, and go to state 13
+
+
+state 11
+
+    2 line: exp print .
+
+    $default  reduce using rule 2 (line)
+
+
+state 12
+
+    6 exp: exp ADD . term
+
+    LEFTP   shift, and go to state 1
+    number  shift, and go to state 3
+
+    term    go to state 19
+    factor  go to state 7
+
+
+state 13
+
+    7 exp: exp SUB . term
+
+    LEFTP   shift, and go to state 1
+    number  shift, and go to state 3
+
+    term    go to state 20
+    factor  go to state 7
+
+
+state 14
+
+    4 line: exp exit_command .
+
+    $default  reduce using rule 4 (line)
+
+
+state 15
+
+    9 term: term MUL . factor
+
+    LEFTP   shift, and go to state 1
+    number  shift, and go to state 3
+
+    factor  go to state 21
+
+
+state 16
+
+   10 term: term DIV . factor
+
+    LEFTP   shift, and go to state 1
+    number  shift, and go to state 3
+
+    factor  go to state 22
+
+
+state 17
+
+   12 factor: LEFTP exp RIGHTP .
+
+    $default  reduce using rule 12 (factor)
+
+
+state 18
+
+    3 line: line exp print .
+
+    $default  reduce using rule 3 (line)
+
+
+state 19
+
+    6 exp: exp ADD term .
+    9 term: term . MUL factor
+   10     | term . DIV factor
+
+    MUL  shift, and go to state 15
+    DIV  shift, and go to state 16
+
+    $default  reduce using rule 6 (exp)
+
+
+state 20
+
+    7 exp: exp SUB term .
+    9 term: term . MUL factor
+   10     | term . DIV factor
+
+    MUL  shift, and go to state 15
+    DIV  shift, and go to state 16
+
+    $default  reduce using rule 7 (exp)
+
+
+state 21
+
+    9 term: term MUL factor .
+
+    $default  reduce using rule 9 (term)
+
+
+state 22
+
+   10 term: term DIV factor .
+
+    $default  reduce using rule 10 (term)

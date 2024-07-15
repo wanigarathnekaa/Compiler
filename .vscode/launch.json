@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/USER/Documents/UCSC/3rd-Year_1st_Sem/SCS-3211_Compiler_Theory/Assignment CT",
+      "program": "/Users/USER/Documents/UCSC/3rd-Year_1st_Sem/SCS-3211_Compiler_Theory/Assignment CT/build/Debug/outDebug"
+    }
+  ]
+}
