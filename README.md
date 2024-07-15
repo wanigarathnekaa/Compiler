@@ -22,57 +22,77 @@ Run Makefile or below commands
 
     g++ lex.yy.c parser.tab.c -ll
 
-**Test Cases**
-***20 Example Test Cases***
 
-1. 1+3
-Result: 4
-2. 5-3
-Result: 2
-3. 4*2+5
-Result: 13
-4. 2+4-5
-Result: 1
-5. 8/2
-Result: 4
-6. (2+3)*5
-Result: 25
-7. (1 + (2 + 3)) * 4
-Result: 24
-8. 10-2+3
-Result: 11
-9. 5/0
-Error: Division by zero
-Result: 0
-10. 2 + 3 * (4 - 1)
-Result: 11
-11. 3 + 5 * 2 - 8 / 4
-Result: 11
-12. ((2 + 3) * 4) / 2
-Result: 10
-13. 42
-Result: 42
-14. (3 * 2) + 5
-Result: 11
-15. 5 + (3 * 2)
-Result: 11
-16. 1 + 1
-Result: 2
-17. 2 * 2
-Result: 4
-18. 3 * (2 + (5 - 3) * 2)
-Result: 18
-19. 1+(1)
-Result: 2
-20. 5 + 3 STOP
-Result: 8
-Program terminates
+## Test Cases
 
-**Guid Lines**
-• upon arriving STOP, program should terminate.
-• Tokens may be separated by any number of white spaces, tabs or new lines.
-• Expressions are followed by + or – operator. Note that these are left associative and have
-lower precedence than multiplication and division.
-• Term is followed by * or / operator and they are left associative.
-• If there is a parse error, you need to report the error.
-        o Your error messages must contain the line number where the error was found.
+Here are **20 example test cases** to demonstrate the functionality of our calculator:
+
+1. **Input**: `1 + 3`  
+   **Output**: `Result: 4`
+
+2. **Input**: `5 - 3`  
+   **Output**: `Result: 2`
+
+3. **Input**: `4 * 2 + 5`  
+   **Output**: `Result: 13`
+
+4. **Input**: `2 + 4 - 5`  
+   **Output**: `Result: 1`
+
+5. **Input**: `8 / 2`  
+   **Output**: `Result: 4`
+
+6. **Input**: `(2 + 3) * 5`  
+   **Output**: `Result: 25`
+
+7. **Input**: `(1 + (2 + 3)) * 4`  
+   **Output**: `Result: 24`
+
+8. **Input**: `10 - 2 + 3`  
+   **Output**: `Result: 11`
+
+9. **Input**: `5 / 0`  
+   **Output**: `Error: Division by zero error`  
+   **Result**: `0`
+
+10. **Input**: `2 + 3 * (4 - 1)`  
+    **Output**: `Result: 11`
+
+11. **Input**: `3 + 5 * 2 - 8 / 4`  
+    **Output**: `Result: 11`
+
+12. **Input**: `((2 + 3) * 4) / 2`  
+    **Output**: `Result: 10`
+
+13. **Input**: `42`  
+    **Output**: `Result: 42`
+
+14. **Input**: `(3 * 2) + 5`  
+    **Output**: `Result: 11`
+
+15. **Input**: `5 + (3 * 2)`  
+    **Output**: `Result: 11`
+
+16. **Input**: `1 + 1`  
+    **Output**: `Result: 2`
+
+17. **Input**: `2 * 2`  
+    **Output**: `Result: 4`
+
+18. **Input**: `3 * (2 + (5 - 3) * 2)`  
+    **Output**: `Result: 18`
+
+19. **Input**: `1 + (1)`  
+    **Output**: `Result: 2`
+
+20. **Input**: `5 + 3 STOP`  
+    **Output**: `Result: 8`  
+    **Output**: `Program terminates`
+
+## Guidelines
+
+- Upon encountering the `STOP` token, the program should terminate.
+- Tokens can be separated by any number of white spaces, tabs, or new lines.
+- Expressions are followed by `+` or `–` operators, which are left associative and have lower precedence than multiplication and division.
+- Terms are followed by `*` or `/` operators, which are left associative.
+- If there is a parse error, the program must report the error with the line number where the error was found.
